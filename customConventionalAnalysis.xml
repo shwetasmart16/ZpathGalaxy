@@ -1,0 +1,36 @@
+<tool id="customConventionalAnalysis" name="Customize Conventional Analysis" profile="16.04" version="1.0.0">
+    <description>User selects files and input</description>
+    <requirements>
+        <requirement type="package" version="1.0.0">fys5555_py3</requirement>
+    </requirements>
+    <command>
+        <![CDATA[                                                                                                                                         
+    python '/storage/software/src/FYS5555/Conventional_Analysis/CodeExample/GenrunSelector.py' '$hfile' '$Cfile' '$inputskim' '$inputdata';                
+    ]]>
+    </command>
+    <inputs>
+
+        <param name="hfile" type="data" format="source.h" label="Please select MySelector.h from the dropdown or upload new MySelector.h from the 'Browse Datasets' button to the right." help="" />
+        <param name="Cfile" type="data" format="source.c" label="Pease select MySelector.C from the dropdown or upload new MySelector.C from the 'Browse Datasets' button to the right." help="" />
+        <param name="RootFile" type="data" format="hep.root" label="test" help="" />
+        <param name="inputskim" type="select" label="Please select the skim" help="If no option has selected the first one is selected by default.">
+            <option value="1lep" selected="true">1lep</option>
+            <option value="2lep">2lep</option>
+            <option value="3lep">3lep</option>
+            <option value="1largeRjet1lep">1largeRjet1lep</option>
+            <option value="GamGam">GamGam</option>
+        </param>
+        <param name="inputdata" type="select" label="Select Specific for above selection" help="If no option has selected the first one is selected by default.">
+            <option value="Data" selected="true">Data</option>
+            <option value="MC">MC</option>
+        </param>
+    </inputs>
+    <outputs>
+        <collection name="output" type="list" label="Conventional Analysis ">
+            <discover_datasets pattern="(?P&lt;designation&gt;.+)\.root" directory="Histograms/" ext="root" recurse="true" visible="false" />
+        </collection>
+    </outputs>
+    <help>
+    This tools runs a python script to select database.
+  </help>
+</tool>
